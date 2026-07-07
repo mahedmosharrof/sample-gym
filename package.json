@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "framer-motion": "^12.42.2",
+    "lucide-react": "^1.23.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "autoprefixer": "^10.5.2",
+    "postcss": "^8.5.16",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4.3.2"
+  },
+  "scripts": {
+    "start": "tailwindcss -i ./src/index.css -o ./src/output.css --watch & react-scripts start",
+    "build": "tailwindcss -i ./src/index.css -o ./src/output.css && react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
