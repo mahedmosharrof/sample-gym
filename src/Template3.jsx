@@ -1,8 +1,66 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, ArrowLeft, Star, Layers, Activity, Compass, Check } from 'lucide-react';
 
 export default function Template3() {
   const scrollRef = useRef(null);
+  const [isConceptActive, setIsConceptActive] = useState(true);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsConceptActive(entry.isIntersecting);
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    const conceptSection = document.getElementById('concept');
+    if (conceptSection) {
+      observer.observe(conceptSection);
+    }
+
+    return () => {
+      if (conceptSection) {
+        observer.unobserve(conceptSection);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const createPlayer = () => {
+      if (window.YT && window.YT.Player) {
+        new window.YT.Player('bg-video-iframe', {
+          events: {
+            'onReady': (event) => {
+              event.target.mute();
+              event.target.playVideo();
+            },
+            'onStateChange': (event) => {
+              if (event.data === window.YT.PlayerState.ENDED) {
+                event.target.playVideo();
+              }
+            }
+          }
+        });
+      }
+    };
+
+    if (!window.YT) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      const previousReady = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (previousReady) previousReady();
+        createPlayer();
+      };
+    } else {
+      createPlayer();
+    }
+  }, []);
 
   const galleryItems = [
     { title: "KINETIC ENGINE ROOM", tags: ["STRENGTH", "METABOLIC"], img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800", subtitle: "Designed strictly for raw iron velocity." },
@@ -28,7 +86,7 @@ export default function Template3() {
     <div className="h-screen overflow-y-scroll snap-y snap-mandatory scroll-smooth bg-[#08080a] text-neutral-100 font-sans antialiased selection:bg-orange-500 selection:text-black tracking-tight">
       
       {/* BRAND NAVIGATION HEADER */}
-      <header className="fixed top-0 left-0 w-full z-50 py-6 px-8 border-b border-neutral-900/40 bg-black/80 backdrop-blur-md">
+      <header className={`fixed top-0 left-0 w-full z-50 py-6 px-8 border-b transition-all duration-300 ${isConceptActive ? 'bg-transparent border-transparent backdrop-blur-none' : 'bg-black/80 border-neutral-900/40 backdrop-blur-md'}`}>
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center gap-3 font-black text-lg uppercase tracking-widest text-white">
             <span className="w-2.5 h-2.5 bg-orange-500 rounded-full animate-ping"></span>
@@ -51,8 +109,9 @@ export default function Template3() {
         {/* Background Video */}
         <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
           <iframe
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full opacity-40"
-            src="https://www.youtube.com/embed/89yP76HLtjc?autoplay=1&mute=1&loop=1&playlist=89yP76HLtjc&controls=0&showinfo=0&rel=0&iv_load_policy=3&playsinline=1"
+            id="bg-video-iframe"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full opacity-40 scale-120"
+            src="https://www.youtube.com/embed/89yP76HLtjc?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=89yP76HLtjc&controls=0&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1"
             allow="autoplay; encrypted-media"
             title="Background Video"
           />
@@ -61,16 +120,16 @@ export default function Template3() {
 
         <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[160px] pointer-events-none z-10"></div>
         
-        <div className="max-w-7xl w-full mx-auto grid lg:grid-cols-12 gap-12 items-start mt-12 relative z-20">
-          <div className="lg:col-span-8">
+        <div className="max-w-7xl w-full mx-auto grid lg:grid-cols-12 concept-grid gap-12 items-start mt-12 relative z-20">
+          <div className="lg:col-span-8 concept-title-col">
             <span className="text-orange-500 text-xs font-bold tracking-widest uppercase block mb-4">// BRAND DIRECTIVE PROJECT-2</span>
-            <h1 className="text-6xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
+            <h1 className="text-8xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
               WE SHAPE <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-500 to-neutral-800">PHYSICAL</span> <br />
               IDENTITY.
             </h1>
           </div>
-          <div className="lg:col-span-4 lg:pt-8 border-l border-neutral-800 pl-6">
+          <div className="lg:col-span-4 lg:pt-8 concept-desc-col border-l border-neutral-800 pl-6">
             <p className="text-sm text-neutral-400 font-light leading-relaxed mb-6">
               SquatLab operates at the intersection of heavy load volume and pristine geometric layout aesthetics. We engineer high-density commercial frameworks built to completely reconfigure your athletic boundaries.
             </p>

@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --radius-full: 9999px;
+}
+
 /* ⚡️ Custom non-nested media queries to bypass Create React App's build minifier bug */
 @media (min-width: 1024px) {
   .membership-grid {
@@ -15,6 +19,17 @@
   }
   .map-iframe-col {
     grid-column: span 7 / span 7 !important;
+  }
+  .concept-grid {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+  .concept-title-col {
+    grid-column: span 8 / span 8 !important;
+  }
+  .concept-desc-col {
+    grid-column: span 4 / span 4 !important;
+    padding-top: 2rem !important;
   }
 }
 
