@@ -81,8 +81,8 @@ export default function Template3() {
       </section>
 
       {/* SECTION 2: HORIZONTAL GALLERY DISPLAY */}
-      <section id="gallery-track" className="min-h-screen w-full bg-[#0c0d12] py-24 flex flex-col justify-center border-b border-neutral-900 relative snap-start shrink-0">
-        <div className="max-w-7xl mx-auto w-full px-8 flex justify-between items-end mb-8">
+      <section id="gallery-track" className="min-h-screen w-full bg-[#0c0d12] py-24 px-8 flex flex-col justify-center border-b border-neutral-900 relative snap-start shrink-0">
+        <div className="max-w-7xl mx-auto w-full flex justify-between items-end mb-8">
           <div>
             <span className="text-orange-500 text-xs font-bold tracking-widest uppercase block mb-2">// CAPTURED SYSTEMS</span>
             <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight">EXHIBITION SPACE DISPLAY</h2>
@@ -96,7 +96,7 @@ export default function Template3() {
             </button>
           </div>
         </div>
-        <div ref={scrollRef} className="w-full overflow-x-auto flex gallery-container gap-6 px-8 scrollbar-none snap-x snap-mandatory">
+        <div ref={scrollRef} className="max-w-7xl mx-auto w-full overflow-x-auto flex gallery-container gap-6 scrollbar-none snap-x snap-mandatory">
           {galleryItems.map((item, index) => (
             <div key={index} className="w-[300px] gallery-card shrink-0 snap-start group relative">
               <div className="w-full h-[420px] overflow-hidden bg-neutral-950 border border-neutral-900 relative">
