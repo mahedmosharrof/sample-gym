@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* ⚡️ Custom non-nested media queries to bypass Create React App's build minifier bug */
+@media (min-width: 1024px) {
+  .membership-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .map-grid {
+    display: grid !important;
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  }
+  .map-text-col {
+    grid-column: span 5 / span 5 !important;
+  }
+  .map-iframe-col {
+    grid-column: span 7 / span 7 !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .gallery-card {
+    width: 460px !important;
+  }
+  .why-squat-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .footer-bottom {
+    flex-direction: row !important;
+  }
+  .nav-menu {
+    display: flex !important;
+  }
+}
+
+/* ⚡️ Scroll centering without left-clipping overflow bug */
+.gallery-container::before,
+.gallery-container::after {
+  content: '';
+  flex-grow: 1;
+  flex-shrink: 1;
+  display: block;
+}
