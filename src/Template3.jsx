@@ -48,8 +48,20 @@ export default function Template3() {
 
       {/* SECTION 1: HERO (snap-start h-screen ensures it locks entirely on scroll) */}
       <section id="concept" className="h-screen w-full pt-36 pb-20 px-8 flex flex-col justify-between relative overflow-hidden border-b border-neutral-900 snap-start shrink-0">
-        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[160px] pointer-events-none"></div>
-        <div className="max-w-7xl w-full mx-auto grid lg:grid-cols-12 gap-12 items-start mt-12">
+        {/* Background Video */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
+          <iframe
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.77777778vh] min-w-full h-[56.25vw] min-h-full opacity-40"
+            src="https://www.youtube.com/embed/89yP76HLtjc?autoplay=1&mute=1&loop=1&playlist=89yP76HLtjc&controls=0&showinfo=0&rel=0&iv_load_policy=3&playsinline=1"
+            allow="autoplay; encrypted-media"
+            title="Background Video"
+          />
+          <div className="absolute inset-0 bg-black/65"></div>
+        </div>
+
+        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[160px] pointer-events-none z-10"></div>
+        
+        <div className="max-w-7xl w-full mx-auto grid lg:grid-cols-12 gap-12 items-start mt-12 relative z-20">
           <div className="lg:col-span-8">
             <span className="text-orange-500 text-xs font-bold tracking-widest uppercase block mb-4">// BRAND DIRECTIVE PROJECT-2</span>
             <h1 className="text-6xl md:text-9xl font-black text-white uppercase tracking-tighter leading-[0.85] mb-8">
@@ -68,7 +80,7 @@ export default function Template3() {
             </div>
           </div>
         </div>
-        <div className="max-w-7xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-t border-neutral-900 pt-8 text-xs text-neutral-500 uppercase tracking-widest font-semibold">
+        <div className="max-w-7xl w-full mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-t border-neutral-900 pt-8 text-xs text-neutral-500 uppercase tracking-widest font-semibold relative z-20">
           <div className="flex items-center gap-6">
             <span>[ LATENCY: EXCELLENCE 12Y ]</span>
             <span>[ CAPACITY: 27K NETWORK ]</span>
